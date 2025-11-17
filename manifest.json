@@ -1,0 +1,22 @@
+{
+  "name": "Kwadrans z Marszałem – Archiwum Radia Meteor",
+  "short_name": "Archiwum Radia Meteor",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FF6600",
+  "theme_color": "#000000",
+  "description": "Webowy audio player do odsłuchu archiwalnych audycji Radia Meteor",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icons/Icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/Icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
