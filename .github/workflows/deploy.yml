@@ -1,0 +1,66 @@
+name: Deploy Flutter web to GitHub Pages
+
+on:
+  push:
+    branches: ["main", "master"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: github-pages
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build web app
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          DRIVE_FOLDER_ID: ${{ secrets.DRIVE_FOLDER_ID }}
+        run: |
+          if [ -z "${GOOGLE_API_KEY}" ]; then
+            echo "GOOGLE_API_KEY environment secret is required" >&2
+            exit 1
+          fi
+
+          # DRIVE_FOLDER_ID is optional; falls back to the in-app default when unset.
+          FLUTTER_DEFINES=("--dart-define=GOOGLE_API_KEY=${GOOGLE_API_KEY}")
+          if [ -n "${DRIVE_FOLDER_ID}" ]; then
+            FLUTTER_DEFINES+=("--dart-define=DRIVE_FOLDER_ID=${DRIVE_FOLDER_ID}")
+          fi
+
+          flutter build web --release "${FLUTTER_DEFINES[@]}"
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/web
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
