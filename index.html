@@ -32,6 +32,11 @@
   <script>
     const serviceWorkerVersion = "1483504919";
   </script>
+  <script src="env.js"></script>
+  <script>
+    window.__ENV = window.__ENV || {};
+    window.__ENV.GOOGLE_API_KEY = window.__ENV.GOOGLE_API_KEY || "YOUR_GOOGLE_API_KEY";
+  </script>
   <script src="flutter.js" defer></script>
 </head>
 <body>
