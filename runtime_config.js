@@ -7,7 +7,8 @@
 (function () {
   window.__KWADRANS_CONFIG__ = window.__KWADRANS_CONFIG__ || {};
   window.__KWADRANS_CONFIG__.googleApiKey =
-    window.__KWADRANS_CONFIG__.googleApiKey || 'YOUR_GOOGLE_API_KEY';
+    window.__KWADRANS_CONFIG__.googleApiKey || 'AIzaSyBMxfBBYAYcj2SPWGzzdLE-HW2JWnG-BBA';
   window.__KWADRANS_CONFIG__.driveFolderId =
     window.__KWADRANS_CONFIG__.driveFolderId || '11HvPoMRfPA7yFmpYee4EJyCA3VyexcrH';
 })();
+
