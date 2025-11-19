@@ -25,6 +25,9 @@
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
   <meta name="kwadrans-google-api-key" content="">
   <meta name="kwadrans-drive-folder-id" content="11HvPoMRfPA7yFmpYee4EJyCA3VyexcrH">
+  <meta name="kwadrans-config-url" content="">
+  <meta name="kwadrans-config-json" content="">
+  <meta name="kwadrans-config-base64" content="">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png" />
@@ -32,8 +35,28 @@
   <title>Kwadrans z Marszałem - Archiwum Radia Meteor</title>
   <link rel="manifest" href="manifest.json">
   <script>
-    const serviceWorkerVersion = "3674834208";
+    const serviceWorkerVersion = "2319151362";
   </script>
+  <!--
+    Inject runtime_config.js from GitHub Pages (or another trusted origin) after
+    you edit build/web/runtime_config.js with the locked-down API key. You can
+    also point this script tag at an external URL that exposes
+    window.__KWADRANS_CONFIG__ if you prefer to host the secrets elsewhere.
+
+    Alternatively set <meta name="kwadrans-config-url"> to a HTTPS JSON endpoint
+    that returns {"googleApiKey": "...", "driveFolderId": "..."}. This lets
+    you host the runtime config on Cloudflare Workers / Firebase Hosting / etc.
+
+    When using GitHub Pages environment variables/secrets, reference them via
+    Liquid in the <meta name="kwadrans-config-base64"> or
+    <meta name="kwadrans-config-json"> tags, for example:
+
+      <meta name="kwadrans-config-base64"
+        content="{{ secrets.KWADRANS_RUNTIME_CONFIG_B64 }}">
+
+    The Flutter runtime will decode the base64 string and treat it as the JSON
+    runtime config, so the plain-text values never land in Git history.
+  -->
   <script src="runtime_config.js"></script>
   <script src="flutter.js" defer></script>
 </head>
